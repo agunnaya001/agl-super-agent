@@ -1,60 +1,61 @@
-'use client';
-
 import Link from 'next/link';
-import RootLayout from '@/components/layout/root-layout';
-import BalanceCard from '@/components/dashboard/balance-card';
-import { useWallet } from '@/lib/hooks/useWallet';
 import { ArrowRight, Coins, Zap, MessageCircle, BarChart3 } from 'lucide-react';
 
 export default function Home() {
-  const { isConnected } = useWallet();
-
   return (
-    <RootLayout>
+    <main className="min-h-screen bg-background">
+      <nav className="border-b border-border bg-card sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-primary">AGL Super Agent</h1>
+          <Link href="/dashboard" className="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90">
+            Dashboard
+          </Link>
+        </div>
+      </nav>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">AGL Super Agent</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl">
+        <div className="mb-16">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
+            AGL Super Agent
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mb-8">
             Next-generation blockchain-as-a-service platform. Manage your AGL tokens, earn credits,
-            and interact with intelligent AI agents.
+            and interact with intelligent AI agents on Base Mainnet.
           </p>
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-medium hover:opacity-90 transition"
+          >
+            Get Started
+            <ArrowRight size={20} />
+          </Link>
         </div>
 
-        {isConnected && (
-          <>
-            {/* Balance Cards */}
-            <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-6">Your Portfolio</h2>
-              <BalanceCard />
-            </div>
-          </>
-        )}
-
         {/* Features Grid */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Features</h2>
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold mb-8">Features</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <FeatureCard
-              icon={<Coins size={24} />}
+              icon={<Coins size={32} />}
               title="AGL Tokens"
-              description="Manage and trade AGL tokens on Base"
+              description="Manage and trade AGL tokens on Base Mainnet"
               href="/dashboard/token"
             />
             <FeatureCard
-              icon={<Zap size={24} />}
+              icon={<Zap size={32} />}
               title="Credits System"
-              description="Burn tokens to earn credits and access features"
+              description="Burn tokens to earn credits and unlock features"
               href="/dashboard/credits"
             />
             <FeatureCard
-              icon={<MessageCircle size={24} />}
+              icon={<MessageCircle size={32} />}
               title="AI Chat"
               description="Interact with blockchain-aware AI agents"
               href="/dashboard/chat"
             />
             <FeatureCard
-              icon={<BarChart3 size={24} />}
+              icon={<BarChart3 size={32} />}
               title="Analytics"
               description="Track transactions and portfolio performance"
               href="/dashboard/history"
@@ -62,24 +63,14 @@ export default function Home() {
           </div>
         </div>
 
-        {/* CTA Section */}
-        {!isConnected && (
-          <div className="bg-gradient-to-r from-primary to-accent rounded-lg p-8 text-center">
-            <h3 className="text-2xl font-bold text-white mb-4">Get Started Today</h3>
-            <p className="text-white/80 mb-6">
-              Connect your wallet and start managing your AGL portfolio
-            </p>
-            <Link
-              href="/dashboard"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-primary rounded-lg font-medium hover:opacity-90 transition"
-            >
-              Go to Dashboard
-              <ArrowRight size={20} />
-            </Link>
-          </div>
-        )}
+        {/* Stats Section */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-12 border-t border-border">
+          <StatCard label="Network" value="Base Mainnet" />
+          <StatCard label="Live Contracts" value="2" />
+          <StatCard label="Features" value="7+" />
+        </div>
       </div>
-    </RootLayout>
+    </main>
   );
 }
 
@@ -97,12 +88,21 @@ function FeatureCard({
   return (
     <Link href={href}>
       <div className="bg-card rounded-lg p-6 border border-border hover:border-primary transition cursor-pointer h-full">
-        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4">
+        <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4">
           {icon}
         </div>
-        <h3 className="font-bold mb-2">{title}</h3>
+        <h4 className="font-bold mb-2 text-lg">{title}</h4>
         <p className="text-sm text-muted-foreground">{description}</p>
       </div>
     </Link>
+  );
+}
+
+function StatCard({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="text-center">
+      <div className="text-3xl font-bold text-primary mb-2">{value}</div>
+      <div className="text-muted-foreground">{label}</div>
+    </div>
   );
 }

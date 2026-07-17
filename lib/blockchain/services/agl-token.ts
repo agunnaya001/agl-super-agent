@@ -1,14 +1,14 @@
 import { Contract, parseEther, formatEther } from 'ethers';
 import { getProvider, getSigner } from '../provider';
 import { AGL_TOKEN_ABI } from '../abis/agl-token';
-import { AppConfig } from '@/lib/config';
+import { CONTRACT_ADDRESSES } from '@/lib/config';
 
 /**
  * Get AGL Token contract instance (read-only)
  */
 export function getAGLTokenContract() {
   const provider = getProvider();
-  return new Contract(AppConfig.contracts.aglToken, AGL_TOKEN_ABI, provider);
+  return new Contract(CONTRACT_ADDRESSES.aglToken, AGL_TOKEN_ABI, provider);
 }
 
 /**

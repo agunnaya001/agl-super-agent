@@ -1,5 +1,5 @@
 import { JsonRpcProvider, BrowserProvider, Signer } from 'ethers';
-import { AppConfig } from '@/lib/config';
+import { NETWORK_CONFIG } from '@/lib/config';
 
 let provider: JsonRpcProvider | null = null;
 let browserProvider: BrowserProvider | null = null;
@@ -9,9 +9,9 @@ let browserProvider: BrowserProvider | null = null;
  */
 export function getProvider(): JsonRpcProvider {
   if (!provider) {
-    provider = new JsonRpcProvider(AppConfig.rpcUrl, {
-      name: AppConfig.networkName,
-      chainId: AppConfig.chainId,
+    provider = new JsonRpcProvider(NETWORK_CONFIG.rpcUrl, {
+      name: NETWORK_CONFIG.name,
+      chainId: NETWORK_CONFIG.chainId,
     });
   }
   return provider;
