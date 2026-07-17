@@ -10,18 +10,16 @@ import {
   Gift,
   MessageCircle,
   BarChart3,
-  Settings,
 } from 'lucide-react';
 
 const navigation = [
   { name: 'Home', href: '/', icon: Home },
-  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { name: 'Portfolio', href: '/dashboard/portfolio', icon: BarChart3 },
-  { name: 'AGL Token', href: '/dashboard/token', icon: Coins },
-  { name: 'Credits', href: '/dashboard/credits', icon: Gift },
-  { name: 'Chat', href: '/dashboard/chat', icon: MessageCircle },
-  { name: 'History', href: '/dashboard/history', icon: BarChart3 },
-  { name: 'Settings', href: '/dashboard/settings', icon: Settings },
+  { name: 'Dashboard', href: '/token', icon: LayoutDashboard },
+  { name: 'Portfolio', href: '/portfolio', icon: BarChart3 },
+  { name: 'AGL Token', href: '/token', icon: Coins },
+  { name: 'Credits', href: '/credits', icon: Gift },
+  { name: 'Chat', href: '/chat', icon: MessageCircle },
+  { name: 'History', href: '/history', icon: BarChart3 },
 ];
 
 export default function Sidebar() {
