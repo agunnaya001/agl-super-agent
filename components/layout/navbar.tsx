@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useWallet } from '@/lib/hooks/useWallet';
 import { useUIStore } from '@/lib/store/ui-store';
 import { getShortAddress } from '@/lib/blockchain/wallet';
@@ -12,15 +13,23 @@ export default function Navbar() {
   const { sidebarOpen, toggleSidebar, openModal } = useUIStore();
 
   return (
-    <nav className="border-b border-border bg-background sticky top-0 z-40">
+    <nav className="border-b border-border bg-card/50 backdrop-blur-md sticky top-0 z-40 shadow-lg shadow-primary/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center text-white font-bold text-sm">
-              AGL
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition">
+            <div className="w-10 h-10 relative">
+              <Image
+                src="/agl-token-logo.png"
+                alt="AGL Token Logo"
+                width={40}
+                height={40}
+                className="w-full h-full object-contain"
+              />
             </div>
-            <span className="font-bold text-lg hidden sm:inline">AGL Super Agent</span>
+            <span className="font-bold text-lg hidden sm:inline bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              AGL Super Agent
+            </span>
           </Link>
 
           {/* Desktop Navigation */}

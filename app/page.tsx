@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Coins, Zap, MessageCircle, BarChart3, Lock, Rocket, Gauge } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -15,13 +16,19 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-background to-background">
       {/* Navigation */}
-      <nav className="border-b border-border bg-card/50 backdrop-blur-md sticky top-0 z-50">
+      <nav className="border-b border-border bg-card/50 backdrop-blur-md sticky top-0 z-50 shadow-lg shadow-primary/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-sm font-bold text-white">AGL</span>
+          <div className="flex items-center gap-3 hover:opacity-80 transition">
+            <div className="w-10 h-10 relative">
+              <Image
+                src="/agl-token-logo.png"
+                alt="AGL Token Logo"
+                width={40}
+                height={40}
+                className="w-full h-full object-contain"
+              />
             </div>
-            <h1 className="text-xl font-bold text-foreground">AGL Super Agent</h1>
+            <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">AGL Super Agent</h1>
           </div>
           <div className="flex items-center gap-4">
             <Link href="/dashboard" className="text-sm text-muted-foreground hover:text-foreground transition">

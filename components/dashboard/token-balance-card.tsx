@@ -1,7 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import { useWallet } from '@/lib/hooks/useWallet';
-import { Coins, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { formatNumber } from '@/lib/utils/formatting';
 import { TOKEN_CONFIG, NETWORK_CONFIG } from '@/lib/config';
 
@@ -18,11 +19,17 @@ export default function TokenBalanceCard({ onTransferClick }: TokenBalanceCardPr
   const explorerUrl = `${NETWORK_CONFIG.blockExplorer}/token/${TOKEN_CONFIG.aglToken.address}`;
 
   return (
-    <div className="bg-card border border-border rounded-lg p-6 shadow-sm hover:shadow-md transition">
+    <div className="bg-card border border-border rounded-lg p-6 shadow-sm hover:shadow-lg hover:shadow-primary/10 transition hover:border-primary/50">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-primary/10">
-            <Coins size={24} className="text-primary" />
+          <div className="p-1 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20">
+            <Image
+              src="/agl-token-logo.png"
+              alt="AGL Token"
+              width={32}
+              height={32}
+              className="w-8 h-8 object-contain"
+            />
           </div>
           <div>
             <h3 className="font-semibold text-foreground">{TOKEN_CONFIG.aglToken.name}</h3>

@@ -1,7 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import { useWallet } from '@/lib/hooks/useWallet';
-import { Gift, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { formatNumber } from '@/lib/utils/formatting';
 import { TOKEN_CONFIG, NETWORK_CONFIG } from '@/lib/config';
 
@@ -17,11 +18,17 @@ export default function CreditsBalanceCard({ onBurnClick }: CreditsBalanceCardPr
   const explorerUrl = `${NETWORK_CONFIG.blockExplorer}/token/${TOKEN_CONFIG.aglCredits.address}`;
 
   return (
-    <div className="bg-card border border-border rounded-lg p-6 shadow-sm hover:shadow-md transition">
+    <div className="bg-card border border-border rounded-lg p-6 shadow-sm hover:shadow-lg hover:shadow-accent/10 transition hover:border-accent/50">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-amber-500/10">
-            <Gift size={24} className="text-amber-500" />
+          <div className="p-1 rounded-lg bg-gradient-to-br from-accent/20 to-cyan-500/20">
+            <Image
+              src="/agl-token-logo.png"
+              alt="AGL Credits"
+              width={32}
+              height={32}
+              className="w-8 h-8 object-contain"
+            />
           </div>
           <div>
             <h3 className="font-semibold text-foreground">{TOKEN_CONFIG.aglCredits.name}</h3>
@@ -65,10 +72,10 @@ export default function CreditsBalanceCard({ onBurnClick }: CreditsBalanceCardPr
           </div>
         )}
 
-        {onBurnClick && (
+        {isConnected && onBurnClick && (
           <button
             onClick={onBurnClick}
-            className="w-full mt-4 px-4 py-2 bg-amber-500/10 text-amber-600 dark:text-amber-400 rounded-lg font-medium hover:bg-amber-500/20 transition border border-amber-500/20"
+            className="w-full mt-4 px-4 py-2 bg-accent/10 text-accent rounded-lg font-medium hover:bg-accent/20 transition border border-accent/30"
           >
             Convert from AGL
           </button>
