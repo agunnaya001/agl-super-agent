@@ -10,11 +10,10 @@ interface TokenBalanceCardProps {
 }
 
 export default function TokenBalanceCard({ onTransferClick }: TokenBalanceCardProps) {
-  const { aglBalance, address } = useWallet();
+  const { aglBalance, address, isConnected } = useWallet();
 
   const tokenBalance = aglBalance ? parseFloat(aglBalance) : 0;
-  // Placeholder USD conversion - in production this would fetch real prices
-  const tokenValueUSD = tokenBalance * 0.5; // Assume $0.50 per AGL
+  const tokenValueUSD = tokenBalance * 0.5;
 
   const explorerUrl = `${NETWORK_CONFIG.blockExplorer}/token/${TOKEN_CONFIG.aglToken.address}`;
 
@@ -44,12 +43,18 @@ export default function TokenBalanceCard({ onTransferClick }: TokenBalanceCardPr
       <div className="space-y-4">
         <div>
           <p className="text-sm text-muted-foreground mb-1">Token Balance</p>
-          <p className="text-3xl font-bold text-foreground">
-            {formatNumber(tokenBalance, 4)}
-          </p>
-          <p className="text-sm text-muted-foreground mt-1">
-            ≈ ${formatNumber(tokenValueUSD, 2)}
-          </p>
+          {isConnected ? (
+            <>
+              <p className="text-3xl font-bold text-foreground">
+                {formatNumber(tokenBalance, 4)}
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">
+                ≈ ${formatNumber(tokenValueUSD, 2)}
+              </p>
+            </>
+          ) : (
+            <p className="text-sm text-muted-foreground italic">Connect wallet to view balance</p>
+          )}
         </div>
 
         {address && (
@@ -61,7 +66,7 @@ export default function TokenBalanceCard({ onTransferClick }: TokenBalanceCardPr
           </div>
         )}
 
-        {onTransferClick && (
+        {isConnected && onTransferClick && (
           <button
             onClick={onTransferClick}
             className="w-full mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition"

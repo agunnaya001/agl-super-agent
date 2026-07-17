@@ -7,21 +7,7 @@ import TransactionDetailModal from '@/components/dashboard/transaction-detail-mo
 import { Transaction } from '@/lib/types';
 
 export default function HistoryPage() {
-  const { isConnected, isCorrectNetwork } = useWallet();
   const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
-
-  if (!isConnected || !isCorrectNetwork) {
-    return (
-      <main className="min-h-screen bg-background px-4 py-8">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl font-bold mb-4">Transaction History</h1>
-          <p className="text-lg text-muted-foreground">
-            Please connect your wallet and ensure you&apos;re on Base Mainnet to view your transaction history.
-          </p>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main className="min-h-screen bg-background px-4 py-8">

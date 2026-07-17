@@ -8,7 +8,7 @@ import PortfolioChart from '@/components/dashboard/portfolio-chart';
 import HoldingsBreakdown from '@/components/dashboard/holdings-breakdown';
 
 export default function PortfolioPage() {
-  const { isConnected, isCorrectNetwork, aglBalance, aglCreditsBalance } = useWallet();
+  const { aglBalance, aglCreditsBalance } = useWallet();
   const { setTimeframe, selectedTimeframe, addSnapshot, setCurrentValue } = usePortfolioStore();
 
   // Add portfolio snapshot on balance change
@@ -29,19 +29,6 @@ export default function PortfolioPage() {
       });
     }
   }, [aglBalance, aglCreditsBalance, addSnapshot, setCurrentValue]);
-
-  if (!isConnected || !isCorrectNetwork) {
-    return (
-      <main className="min-h-screen bg-background px-4 py-8">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl font-bold mb-4">Portfolio Analytics</h1>
-          <p className="text-lg text-muted-foreground">
-            Please connect your wallet and ensure you&apos;re on Base Mainnet to view your portfolio.
-          </p>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main className="min-h-screen bg-background px-4 py-8">

@@ -8,21 +8,8 @@ import { useUIStore } from '@/lib/store/ui-store';
 import { X } from 'lucide-react';
 
 export default function TokenPage() {
-  const { isConnected, isCorrectNetwork } = useWallet();
+  const { isConnected } = useWallet();
   const [showTransferModal, setShowTransferModal] = useState(false);
-
-  if (!isConnected || !isCorrectNetwork) {
-    return (
-      <main className="min-h-screen bg-background px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold mb-4">AGL Token Management</h1>
-          <p className="text-lg text-muted-foreground">
-            Please connect your wallet and ensure you&apos;re on Base Mainnet to manage your tokens.
-          </p>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main className="min-h-screen bg-background px-4 py-8">

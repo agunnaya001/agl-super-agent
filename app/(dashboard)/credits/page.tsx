@@ -7,21 +7,7 @@ import BurnForm from '@/components/dashboard/burn-form';
 import { X } from 'lucide-react';
 
 export default function CreditsPage() {
-  const { isConnected, isCorrectNetwork } = useWallet();
   const [showBurnModal, setShowBurnModal] = useState(false);
-
-  if (!isConnected || !isCorrectNetwork) {
-    return (
-      <main className="min-h-screen bg-background px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold mb-4">AGL Credits</h1>
-          <p className="text-lg text-muted-foreground">
-            Please connect your wallet and ensure you&apos;re on Base Mainnet to manage your credits.
-          </p>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main className="min-h-screen bg-background px-4 py-8">

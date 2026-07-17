@@ -18,7 +18,7 @@ interface TransferFormProps {
 type FormStep = 'input' | 'confirm' | 'processing' | 'success';
 
 export default function TransferForm({ onSuccess, onCancel }: TransferFormProps) {
-  const { address, aglBalance } = useWallet();
+  const { address, aglBalance, isConnected } = useWallet();
   const { addNotification } = useUIStore();
   const { addTransaction } = useTransactionStore();
 
@@ -120,6 +120,18 @@ export default function TransferForm({ onSuccess, onCancel }: TransferFormProps)
   }, [address, recipient, amount, addNotification, addTransaction, onSuccess]);
 
   const balance = aglBalance ? parseFloat(aglBalance) : 0;
+
+  if (!isConnected) {
+    return (
+      <div className="space-y-4 text-center">
+        <AlertCircle size={40} className="text-muted-foreground mx-auto" />
+        <p className="text-foreground font-medium">Wallet Not Connected</p>
+        <p className="text-sm text-muted-foreground">
+          Please connect your wallet to transfer tokens.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full max-w-md mx-auto">

@@ -10,7 +10,7 @@ interface CreditsBalanceCardProps {
 }
 
 export default function CreditsBalanceCard({ onBurnClick }: CreditsBalanceCardProps) {
-  const { aglCreditsBalance, address } = useWallet();
+  const { aglCreditsBalance, address, isConnected } = useWallet();
 
   const creditsBalance = aglCreditsBalance ? parseFloat(aglCreditsBalance) : 0;
 
@@ -42,12 +42,18 @@ export default function CreditsBalanceCard({ onBurnClick }: CreditsBalanceCardPr
       <div className="space-y-4">
         <div>
           <p className="text-sm text-muted-foreground mb-1">Credits Balance</p>
-          <p className="text-3xl font-bold text-foreground">
-            {formatNumber(creditsBalance, 2)}
-          </p>
-          <p className="text-sm text-muted-foreground mt-1">
-            Earned from token conversions
-          </p>
+          {isConnected ? (
+            <>
+              <p className="text-3xl font-bold text-foreground">
+                {formatNumber(creditsBalance, 2)}
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Earned from token conversions
+              </p>
+            </>
+          ) : (
+            <p className="text-sm text-muted-foreground italic">Connect wallet to view balance</p>
+          )}
         </div>
 
         {address && (
