@@ -1,14 +1,14 @@
 import { Contract, parseEther, formatEther } from 'ethers';
 import { getProvider, getSigner } from '../provider';
 import { AGL_CREDITS_ABI } from '../abis/agl-credits';
-import { AppConfig } from '@/lib/config';
+import { CONTRACT_ADDRESSES } from '@/lib/config';
 
 /**
  * Get AGLCredits contract instance (read-only)
  */
 export function getAGLCreditsContract() {
   const provider = getProvider();
-  return new Contract(AppConfig.contracts.aglCredits, AGL_CREDITS_ABI, provider);
+  return new Contract(CONTRACT_ADDRESSES.aglCredits, AGL_CREDITS_ABI, provider);
 }
 
 /**
@@ -18,7 +18,7 @@ export async function getAGLCreditsContractWithSigner() {
   const provider = getProvider();
   const signer = await getSigner();
   if (!signer) throw new Error('No signer available');
-  return new Contract(AppConfig.contracts.aglCredits, AGL_CREDITS_ABI, signer);
+  return new Contract(CONTRACT_ADDRESSES.aglCredits, AGL_CREDITS_ABI, signer);
 }
 
 /**

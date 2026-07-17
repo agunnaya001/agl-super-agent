@@ -115,3 +115,39 @@ export async function isWalletConnected(): Promise<boolean> {
   const account = await getCurrentAccount();
   return !!account;
 }
+
+/**
+ * Listen for account changes
+ */
+export function onAccountsChanged(callback: (accounts: string[]) => void): void {
+  if (typeof window !== 'undefined' && (window as any).ethereum) {
+    (window as any).ethereum.on('accountsChanged', callback);
+  }
+}
+
+/**
+ * Listen for chain changes
+ */
+export function onChainChanged(callback: (chainId: string) => void): void {
+  if (typeof window !== 'undefined' && (window as any).ethereum) {
+    (window as any).ethereum.on('chainChanged', callback);
+  }
+}
+
+/**
+ * Remove account change listener
+ */
+export function offAccountsChanged(callback: (accounts: string[]) => void): void {
+  if (typeof window !== 'undefined' && (window as any).ethereum) {
+    (window as any).ethereum.removeListener('accountsChanged', callback);
+  }
+}
+
+/**
+ * Remove chain change listener
+ */
+export function offChainChanged(callback: (chainId: string) => void): void {
+  if (typeof window !== 'undefined' && (window as any).ethereum) {
+    (window as any).ethereum.removeListener('chainChanged', callback);
+  }
+}
