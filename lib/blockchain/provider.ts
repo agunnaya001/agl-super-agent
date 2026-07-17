@@ -160,8 +160,9 @@ export async function getNetworkInfo() {
  * Check if connected to correct network (Base Mainnet)
  */
 export async function isCorrectNetwork(): Promise<boolean> {
+  const { NETWORK_CONFIG } = await import('@/lib/config');
   const networkInfo = await getNetworkInfo();
-  return networkInfo?.chainId === AppConfig.chainId;
+  return networkInfo?.chainId === NETWORK_CONFIG.chainId;
 }
 
 /**

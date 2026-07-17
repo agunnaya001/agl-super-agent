@@ -15,10 +15,10 @@ export function getAGLTokenContract() {
  * Get AGL Token contract with signer (for transactions)
  */
 export async function getAGLTokenContractWithSigner() {
-  const provider = getProvider();
+  const { CONTRACT_ADDRESSES } = await import('@/lib/config');
   const signer = await getSigner();
   if (!signer) throw new Error('No signer available');
-  return new Contract(AppConfig.contracts.aglToken, AGL_TOKEN_ABI, signer);
+  return new Contract(CONTRACT_ADDRESSES.aglToken, AGL_TOKEN_ABI, signer);
 }
 
 /**
